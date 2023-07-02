@@ -1,0 +1,11 @@
+---
+- name: installing the apache2 version
+  apt:
+    name: apache2
+    state: latest
+
+- name: starting apache2
+  systemd: 
+    state: started
+    name: apache2
+    

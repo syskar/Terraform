@@ -1,0 +1,8 @@
+---
+- name: install apache2
+  hosts: all
+  remote_user: ansible
+  become: yes
+
+  roles:
+  - apache2 

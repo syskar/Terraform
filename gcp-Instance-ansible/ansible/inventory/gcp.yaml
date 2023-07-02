@@ -1,0 +1,14 @@
+---
+plugin: gcp_compute
+projects:
+  - testproject-390101
+auth_kind: serviceaccount
+service_account_file: /home/testsyskar/testproject-terraformtest-key.json
+#hostnames:
+  #- name
+keyed_groups:
+  - key: labels
+    prefix: label
+groups:
+  #development: "'env' in (labels|list)"
+  web: "'nginx' in name"
