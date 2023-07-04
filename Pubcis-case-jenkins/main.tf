@@ -6,6 +6,7 @@ locals {
   ssh_user = "ansible"
   private_key_path = "/home/testsyskar/.ssh/id_rsa"
   service-acc = "terraformtest@testproject-390101.iam.gserviceaccount.com"
+  account_scopes=["https://www.googleapis.com/auth/cloud-platform"]
 }
 
 provider "google" {
@@ -13,12 +14,14 @@ provider "google" {
   region = local.region
   //credentials = "${file("F:/Guides/Terraform/Udemy/practice/GCP/testproject-terraformtest-key.json")}"
   //credentials = "${file("/home/testsyskar/testproject-terraformtest-key.json")}"
+  scopes = local.account_scopes
 }
 provider "google-beta" {
   project=local.project_id
   region = local.region
   //credentials = "${file("F:/Guides/Terraform/Udemy/practice/GCP/testproject-terraformtest-key.json")}"
   //credentials = "${file("/home/testsyskar/testproject-terraformtest-key.json")}"
+  scopes = local.account_scopes
 }
 
 resource "google_compute_network" "vpc_network" {
