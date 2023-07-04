@@ -1,7 +1,7 @@
 # file/ansible_user is the ssh private key copied from the jenkins credential file using jenkins credentials
 
 variable "ssh_private_key_file" {
-  default = "./files/ansible_user"
+  default = "/var/lib/jenkins/workspace/TF-ANS-VM-APACHE/files/ansible_user"
 }
 
 locals {
