@@ -1,3 +1,9 @@
+# file/ansible_user is the ssh private key copied from the jenkins credential file using jenkins credentials
+
+variable "ssh_private_key_file" {
+  default = "files/ansible_user"
+}
+
 locals {
   project_id = "testproject-390101"
   region = "us-central" 
@@ -5,7 +11,8 @@ locals {
   image="debian-11-bullseye-v20230615"
   ssh_user = "ansible"
   //private_key_path = "F:/Guides/Terraform/Udemy/practice/GCP/testproject-terraformtest-key.json"
-  private_key_path = "/home/testsyskar/.ssh/id_rsa"
+  //private_key_path = "/home/testsyskar/.ssh/id_rsa" #useful while running directly from the cloudshell or from a system
+  ssh_private_key_content= file(var.ssh_private_key_file) #reading the file content from the above variable
   network = "testp-vpc"
   service-acc = "terraformtest@testproject-390101.iam.gserviceaccount.com"
 }
@@ -66,7 +73,8 @@ resource "google_compute_instance" "nginxweb" {
     connection {
       type = "ssh"
       user = local.ssh_user
-      private_key = file(local.private_key_path)
+      //private_key = file(local.private_key_path)  
+      private_key = local.ssh_private_key_content
       host = google_compute_instance.nginxweb.network_interface.0.access_config.0.nat_ip
     }  
   }
