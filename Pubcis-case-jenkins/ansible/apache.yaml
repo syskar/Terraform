@@ -1,0 +1,7 @@
+---
+- name: Changing port from 80 to 8080 in apache
+  hosts: all
+  become: yes
+
+  roles:
+  - apache 

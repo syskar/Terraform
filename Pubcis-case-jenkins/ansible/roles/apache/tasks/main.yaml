@@ -1,0 +1,30 @@
+---
+- name: changing the default port from 80 to 8080 on apache ports.conf
+  shell:
+    name: updating ports.conf 
+    cmd: sed 's/Listen 80/Listen 8080/g' /etc/apache2/ports.conf
+
+- name: changing the port for the virtuslhost value on sites-enabled
+  shell: 
+    name: updating the sites-enabled default conf
+    cmd: sed 's/*:80/*:8080/g' /etc/apache2/sites-enabled/000-default.conf
+
+- name: restarting the service 
+  systemd:
+    name: apache2
+    state: restarted
+  register: result
+
+- name: status of the service
+  debug:
+    var: result
+
+- name: port lisenting
+  shell: 
+    cmd: netstat -anp | grep 8080
+  register: listen
+
+- name: port listening status
+  debug:
+    var: listen    
+
