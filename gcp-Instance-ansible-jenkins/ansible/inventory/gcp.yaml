@@ -4,7 +4,7 @@ projects:
   - testproject-390101
 auth_kind: serviceaccount
 #service_account_file: /home/testsyskar/testproject-terraformtest-key.json
-service_account_file: ../files/testsyskar/testproject-terraformtest-key.json
+service_account_file: ./files/testproject-terraformtest-key.json
 #hostnames:
   #- name
 keyed_groups:
